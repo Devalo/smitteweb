@@ -11,8 +11,7 @@ const Register = () => {
 
   const onSubmit = async (data) => {
     try {
-      const userObject = await fire.auth()
-        .createUserWithEmailAndPassword(data.email, data.password);
+      fire.auth().createUserWithEmailAndPassword(data.email, data.password);
     } catch (err) {
       if (err.code === 'auth/email-already-in-use') {
         setError('Eposten er allerede i bruk');

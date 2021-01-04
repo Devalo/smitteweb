@@ -6,7 +6,7 @@ import fire from '../../config/fire';
 const Login = () => {
   const [noUser, setNoUser] = useState('');
   const {
-    register, handleSubmit, errors, reset,
+    register, handleSubmit, errors,
   } = useForm();
 
   const onSubmit = async (data) => {
@@ -16,8 +16,6 @@ const Login = () => {
       setNoUser('Brukernavn eller passord er feil');
     }
   };
-
-  console.log(noUser);
 
   return (
     <div>

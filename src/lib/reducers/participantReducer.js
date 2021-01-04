@@ -7,7 +7,7 @@ const participantReducer = (state = [], action) => {
     default:
       return state;
   }
-}
+};
 
 export const getAllParticipants = (listId) => {
   return async (dispatch) => {
@@ -15,8 +15,8 @@ export const getAllParticipants = (listId) => {
     dispatch({
       type: '@participants/GET_ALL',
       data,
-    })
-  }
-}
+    });
+  };
+};
 
 export default participantReducer;

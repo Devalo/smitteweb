@@ -1,3 +1,5 @@
+/* eslint-disable import/no-named-as-default-member */
+/* eslint-disable arrow-body-style */
 import arrangementService from '../services/arrangement';
 
 const arrangementReducer = (state = [], action) => {
