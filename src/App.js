@@ -12,6 +12,9 @@ import Login from './components/user/Login';
 
 import AllArrangements from './components/Arrangement/AllArrangements';
 import ViewOne from './components/Arrangement/ViewOne';
+
+import AddPublic from './components/Arrangement/AddPublic';
+
 import './App.css';
 
 
@@ -53,6 +56,9 @@ function App() {
             </Route>
             <Route path="/registrer">
               <Register />
+            </Route>
+            <Route path="/:id">
+              <AddPublic />
             </Route>
             <Route path="/">
               <Frontpage />
