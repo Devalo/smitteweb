@@ -20,7 +20,6 @@ const getAllArrangements = async () => {
 };
 
 export const getOneArrangement = async (listId) => {
-  console.log('GET')
   const arrRef = db.collection('arrangements').doc(listId);
   const singleArrangement = await arrRef.get();
   
@@ -41,7 +40,6 @@ const getAllParticipants = async (listId) => {
     };
     participants.push(obj);
   });
-  console.log(participants);
   return participants;
 };
 

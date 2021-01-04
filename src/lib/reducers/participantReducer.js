@@ -11,7 +11,7 @@ const participantReducer = (state = [], action) => {
 
 export const getAllParticipants = (listId) => {
   return async (dispatch) => {
-    const data = arrangementService.getAllParticipants(listId);
+    const data = await arrangementService.getAllParticipants(listId);
     dispatch({
       type: '@participants/GET_ALL',
       data,

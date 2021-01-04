@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getAllParticipants } from '../../lib/reducers/participantReducer';
 import { getOneArrangement } from '../../lib/services/arrangement';
 
+import ListAllParticipants from './Participants/ListAllParticipants';
+
 const ViewOne = () => {
   const params = useParams();
   const dispatch = useDispatch();
@@ -11,12 +13,13 @@ const ViewOne = () => {
   const [arrangement, setArrangement] = useState();
   
   const arrangementState = useSelector((state) => state.arrangements.find((a) => a.id === params.id));
+  const participants = useSelector((state) => state.participants);
   
   useEffect(() => {
     if (arrangementState) {
       setArrangement(arrangementState);
     }
-  });
+  }, []);
   
   useEffect(() => {
     if (!arrangementState) {
@@ -28,11 +31,13 @@ const ViewOne = () => {
     } 
   }, [dispatch]);
   
+  useEffect(() => {
+    dispatch(getAllParticipants(params.id));
+  }, []);
+  
   
   
   if (arrangement === undefined) return null;
-  
-  console.log(arrangement);
   
   return (
         <div>
@@ -42,10 +47,10 @@ const ViewOne = () => {
         <h1 className="fw-light">{arrangement.name}</h1>
         <p className="lead text-muted">
           Deltakere på {arrangement.name}
-          
         </p>
-        <p>
-        </p>
+        
+        {participants.length !== 0 ?  <ListAllParticipants participants={participants} /> : 'Ingen registrerte deltakere'}
+       
       </div>
     </div>
   </section>

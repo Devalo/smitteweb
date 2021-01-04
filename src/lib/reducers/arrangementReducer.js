@@ -22,7 +22,6 @@ export const getAllArrangements = () => {
 
 export const getOneArrangement = (listId) => {
   return async (dispatch) => {
-    console.log('GET')
     const data = await arrangementService.getOneArrangement(listId);
     dispatch({
       type: '@arrangements/GET_ONE',
