@@ -11,6 +11,7 @@ import Register from './components/user/Register';
 import Login from './components/user/Login';
 
 import AllArrangements from './components/Arrangement/AllArrangements';
+import AddArrangement from './components/Arrangement/AddArrangement';
 import ViewOne from './components/Arrangement/ViewOne';
 
 import AddPublic from './components/Arrangement/AddPublic';
@@ -42,6 +43,9 @@ function App() {
         {signedIn 
           ? (
             <Switch>
+              <Route path="/arrangement/legg-til">
+                <AddArrangement />
+              </Route>
               <Route path="/arrangement/:id">
                 <ViewOne />
               </Route>

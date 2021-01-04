@@ -43,6 +43,28 @@ const getAllParticipants = async (listId) => {
   return participants;
 };
 
+const addArrangement = async (listName) => {
+  const user = fire.auth().currentUser;
+  try {
+    const data = {
+      name: listName,
+      belongsTo: user.uid,
+    };
+    
+    const addList = await db.collection('arrangements').add(data);
+    
+    const dataWithId = {
+      ...data,
+      id: addList.id,
+    }
+    
+    console.log(dataWithId);
+    
+  } catch (err) {
+    console.error(err);
+  }
+}
+
 export const addParticipant = async (listId, data) => {
   try {
     db.collection(`arrangements/${listId}/participants`).add(data);
@@ -54,4 +76,5 @@ export const addParticipant = async (listId, data) => {
 export default {
   getAllArrangements,
   getAllParticipants,
+  addArrangement,
 };

@@ -20,11 +20,21 @@ export const getAllArrangements = () => {
   };
 };
 
-export const getOneArrangement = (listId) => {
+export const getOneArrangement = (listName) => {
   return async (dispatch) => {
-    const data = await arrangementService.getOneArrangement(listId);
+    const data = await arrangementService.getOneArrangement(listName);
     dispatch({
       type: '@arrangements/GET_ONE',
+      data,
+    });
+  };
+};
+
+export const addArrangement = (userId) => {
+  return async (dispatch) => {
+    const data = await arrangementService.addArrangement(userId);
+    dispatch({
+      type: '@arrangements/ADD_ONE',
       data,
     });
   };
