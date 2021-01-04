@@ -1,7 +1,6 @@
 import arrangementService from '../services/arrangement';
 
 const arrangementReducer = (state = [], action) => {
-  console.log(action.data);
   switch (action.type) {
     case 'GET_ALL':
       return action.data;
@@ -11,7 +10,6 @@ const arrangementReducer = (state = [], action) => {
 
 export const getAllArrangements = () => {
   return async (dispatch) => {
-    console.log('ok')
     const data = await arrangementService.getAllArrangements();
     dispatch({
       type: 'GET_ALL',

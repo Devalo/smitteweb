@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const ListAll = ({ arrangementer }) => {
   return (
@@ -19,7 +20,7 @@ const ListAll = ({ arrangementer }) => {
         </thead>
         <tbody>
           {arrangementer.map((arrangement) => (
-            <tr>
+            <tr key={arrangement.id}>
               <td>
                 {arrangement.name}
               </td>
@@ -27,7 +28,9 @@ const ListAll = ({ arrangementer }) => {
                 {arrangement.participants}
               </td>
               <td>
-                <button className="btn btn-primary btn-sm">Åpne</button>
+                <Link className="btn btn-sm btn-primary" to={`/arrangement/${arrangement.id}`}>
+                  Åpne
+                </Link>
               </td>
             </tr>
           ))}

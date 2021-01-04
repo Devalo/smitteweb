@@ -13,7 +13,6 @@ const AllArrangements = () => {
     dispatch(getAllArrangements());
   }, [dispatch]);
   
-  console.log(allArrangements);
   return (
     <div>
       <section className="py-5 text-center container">
@@ -22,9 +21,7 @@ const AllArrangements = () => {
             <h1 className="fw-light">Mine arrangementer</h1>
             <p className="lead text-muted">
             </p>
-            <p>
-            {allArrangements.length !== 0 ? <ListAll arrangementer={allArrangements} /> : 'Her var det tomt'}
-            </p>
+            {allArrangements.length !== 0 ? <ListAll arrangementer={allArrangements} /> : <p>Her var det tomt</p>}
           </div>
         </div>
       </section>
