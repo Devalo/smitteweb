@@ -1,4 +1,8 @@
+/* eslint-disable import/no-anonymous-default-export */
+import firebase from 'firebase';
+
 import fire from '../../config/fire';
+
 const db = fire.firestore();
 
 const getAllArrangements = async () => {
@@ -15,8 +19,7 @@ const getAllArrangements = async () => {
     };
     arrangements.push(obj);
   });
-  
-    return arrangements;
+  return arrangements;
 };
 
 export const getOneArrangement = async (listId) => {
@@ -27,7 +30,6 @@ export const getOneArrangement = async (listId) => {
 }
 
 const getAllParticipants = async (listId) => {
-  const user = fire.auth().currentUser;
   const participants = [];
   
   const partRef = db.collection(`arrangements/${listId}/participants`);
@@ -43,7 +45,7 @@ const getAllParticipants = async (listId) => {
   return participants;
 };
 
-const addArrangement = async (listName) => {
+const addArrangement = async (listName, callbackFromView) => {
   const user = fire.auth().currentUser;
   try {
     const data = {
@@ -57,8 +59,7 @@ const addArrangement = async (listName) => {
       ...data,
       id: addList.id,
     }
-    
-    console.log(dataWithId);
+    callbackFromView(addList.id);
     
   } catch (err) {
     console.error(err);
@@ -67,7 +68,11 @@ const addArrangement = async (listName) => {
 
 export const addParticipant = async (listId, data) => {
   try {
-    db.collection(`arrangements/${listId}/participants`).add(data);
+    const added = await db.collection(`arrangements/${listId}/participants`).add(data);
+    const increment = firebase.firestore.FieldValue.increment(1);
+
+    const participantRef = db.collection('arrangements').doc(listId);
+    participantRef.update({ participantCount: increment });
   } catch (err) {
     console.log(err);
   }

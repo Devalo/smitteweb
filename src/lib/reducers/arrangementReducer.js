@@ -30,9 +30,9 @@ export const getOneArrangement = (listName) => {
   };
 };
 
-export const addArrangement = (userId) => {
+export const addArrangement = (userId, callback) => {
   return async (dispatch) => {
-    const data = await arrangementService.addArrangement(userId);
+    const data = await arrangementService.addArrangement(userId, callback);
     dispatch({
       type: '@arrangements/ADD_ONE',
       data,

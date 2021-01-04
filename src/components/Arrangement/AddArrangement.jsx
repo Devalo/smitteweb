@@ -1,17 +1,21 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import { addArrangement } from '../../lib/reducers/arrangementReducer';
 
 const AddArrangement = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const {
     register, handleSubmit, errors, reset,
   } = useForm();
   
   const onSubmit = (data) => {
-    dispatch(addArrangement(data.name))
+    dispatch(addArrangement(data.name, (id) => {
+      history.push(`/arrangement/${id}`);
+    }));
   }
   
   return (

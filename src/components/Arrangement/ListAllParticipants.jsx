@@ -25,7 +25,7 @@ const ListAll = ({ arrangementer }) => {
                 {arrangement.name}
               </td>
               <td>
-                {arrangement.participants}
+                {arrangement.participantCount}
               </td>
               <td>
                 <Link className="btn btn-sm btn-primary" to={`/arrangement/${arrangement.id}`}>

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { getAllArrangements } from '../../lib/reducers/arrangementReducer';
 
-import ListAll from './ListAll';
+import ListAll from './ListAllParticipants';
 
 const AllArrangements = () => {
   const dispatch = useDispatch();
