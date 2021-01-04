@@ -19,6 +19,14 @@ const getAllArrangements = async () => {
     return arrangements;
 };
 
+export const getOneArrangement = async (listId) => {
+  console.log('GET')
+  const arrRef = db.collection('arrangements').doc(listId);
+  const singleArrangement = await arrRef.get();
+  
+  return singleArrangement.data();
+}
+
 const getAllParticipants = async (listId) => {
   const user = fire.auth().currentUser;
   const participants = [];
@@ -33,6 +41,7 @@ const getAllParticipants = async (listId) => {
     };
     participants.push(obj);
   });
+  console.log(participants);
   return participants;
 };
 
