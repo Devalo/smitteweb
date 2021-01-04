@@ -1,6 +1,7 @@
 /* eslint-disable import/no-named-as-default-member */
 /* eslint-disable arrow-body-style */
 import arrangementService from '../services/arrangement';
+import { setNotification } from './notificationReducer';
 
 const arrangementReducer = (state = [], action) => {
   switch (action.type) {
@@ -8,6 +9,10 @@ const arrangementReducer = (state = [], action) => {
       return action.data;
     case '@arrangements/GET_ONE':
       return action.data;
+    case '@arrangements/DELETE': {
+      const remaining = state.filter((arrangement) => arrangement.id !== action.data);
+      return remaining;
+    }
     default: return state;
   }
 };
@@ -39,6 +44,20 @@ export const addArrangement = (userId, callback) => {
       type: '@arrangements/ADD_ONE',
       data,
     });
+  };
+};
+
+export const deleteArrangement = (userId, listId) => {
+  return async (dispatch) => {
+    const res = await arrangementService.deleteArrangement(userId, listId);
+    if (res === true) {
+      dispatch({
+        type: '@arrangements/DELETE',
+        data: listId,
+      });
+    } else {
+      setNotification('Noe gikk galt', 'danger', 2);
+    }
   };
 };
 

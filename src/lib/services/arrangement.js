@@ -51,6 +51,7 @@ const addArrangement = async (listName, callbackFromView) => {
     const data = {
       name: listName,
       belongsTo: user.uid,
+      participantCount: 0,
     };
 
     const addList = await db.collection('arrangements').add(data);
@@ -69,7 +70,17 @@ export const addParticipant = async (listId, data) => {
     const participantRef = db.collection('arrangements').doc(listId);
     participantRef.update({ participantCount: increment });
   } catch (err) {
-    console.log(err);
+    console.error(err);
+  }
+};
+const deleteArrangement = async (userId, listId) => {
+  const arrangRef = db.collection('arrangements').doc(listId);
+  try {
+    await arrangRef.delete();
+    return true;
+  } catch (err) {
+    console.error(err);
+    return false;
   }
 };
 
@@ -77,4 +88,5 @@ export default {
   getAllArrangements,
   getAllParticipants,
   addArrangement,
+  deleteArrangement,
 };

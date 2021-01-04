@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 
 import { getAllArrangements } from '../../lib/reducers/arrangementReducer';
 
-import ListAll from './ListAllParticipants';
+import ListAll from './ListAllArrangements';
+import Spinner from '../shared/Spinner';
 
 const AllArrangements = () => {
   const dispatch = useDispatch();
@@ -13,6 +14,8 @@ const AllArrangements = () => {
   useEffect(() => {
     dispatch(getAllArrangements());
   }, [dispatch]);
+
+  if (allArrangements === undefined) return <Spinner />;
 
   return (
     <div>

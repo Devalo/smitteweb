@@ -7,6 +7,7 @@ import { setNotification } from '../../lib/reducers/notificationReducer';
 import { getOneArrangement } from '../../lib/services/arrangement';
 
 import ListAllParticipants from './Participants/ListAllParticipants';
+import Spinner from '../shared/Spinner';
 import QRModal from './QRModal';
 
 const ViewOne = () => {
@@ -49,7 +50,8 @@ const ViewOne = () => {
     dispatch(setNotification('Delbar link ble kopiert til utklippstavlen', 'success', 2));
   };
 
-  if (arrangement === undefined) return null;
+  if (arrangement === undefined) return <Spinner />;
+  if (participants === undefined) return <Spinner />;
 
   return (
     <div>
