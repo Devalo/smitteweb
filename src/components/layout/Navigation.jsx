@@ -28,17 +28,7 @@ const Navigation = () => {
             <ul className="navbar-nav me-auto">
               <li className="nav-item">
                 <Link to="/" className="nav-link">
-                  Veggen
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/min-side" className="nav-link">
-                  Min side
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/brukere" className="nav-link">
-                  Brukere
+                  Arrangementer
                 </Link>
               </li>
             </ul>

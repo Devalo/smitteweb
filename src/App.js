@@ -6,8 +6,11 @@ import fire from './config/fire';
 
 import Layout from './components/layout/Layout';
 import Frontpage from './components/frontpage/Frontpage';
+
 import Register from './components/user/Register';
 import Login from './components/user/Login';
+
+import AllArrangements from './components/Arrangement/AllArrangements';
 import './App.css';
 
 
@@ -34,6 +37,9 @@ function App() {
         {signedIn 
           ? (
             <Switch>
+              <Route path="/">
+                <AllArrangements />
+              </Route>
             </Switch>
           )
           : (
