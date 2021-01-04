@@ -1,24 +1,57 @@
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getTest } from './lib/reducers/testReducer';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import fire from './config/fire';
+
+import Layout from './components/layout/Layout';
+import Frontpage from './components/frontpage/Frontpage';
+import Register from './components/user/Register';
+import Login from './components/user/Login';
 import './App.css';
 
+
 function App() {
+  const dispatch = useDispatch();
+  const test = useSelector((state) => state.tests);
+  const [signedIn, setSignedIn] = useState(false);
+  
+  
+  fire.auth().onAuthStateChanged((user) => {
+    if (user) {
+      setSignedIn(true);
+    } else {
+      setSignedIn(false);
+    }
+  });
+  
+  useEffect(() => {
+    dispatch(getTest());
+  }, [dispatch]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Layout>
+        {signedIn 
+          ? (
+            <Switch>
+            </Switch>
+          )
+          : (
+            <Switch>
+            <Route path="/logg-inn">
+              <Login />
+            </Route>
+            <Route path="/registrer">
+              <Register />
+            </Route>
+            <Route path="/">
+              <Frontpage />
+            </Route>
+            </Switch>
+          )
+        }
+      </Layout>
+    </Router>
   );
 }
 
