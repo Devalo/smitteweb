@@ -1,17 +1,23 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { addParticipant } from '../../../lib/services/arrangement';
+import fire from '../../../config/fire';
 
 
 const ParticipantForm = () => {
+  const user = fire.auth().currentUser;
   const params = useParams();
+  const history = useHistory();
   const {
     register, handleSubmit, errors, reset,
   } = useForm();
   
   const onSubmit = (data) => {
     addParticipant(params.id, data);
+    if (user === null) {
+      history.push("/takk");
+    }
   }
   
   return (

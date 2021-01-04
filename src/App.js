@@ -14,6 +14,7 @@ import AllArrangements from './components/Arrangement/AllArrangements';
 import ViewOne from './components/Arrangement/ViewOne';
 
 import AddPublic from './components/Arrangement/AddPublic';
+import PublicFormRedirect from './components/Arrangement/Participants/PublicFormRedirect';
 
 import './App.css';
 
@@ -56,6 +57,9 @@ function App() {
             </Route>
             <Route path="/registrer">
               <Register />
+            </Route>
+            <Route path="/takk">
+              <PublicFormRedirect />
             </Route>
             <Route path="/:id">
               <AddPublic />
