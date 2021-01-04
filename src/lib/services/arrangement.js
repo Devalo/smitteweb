@@ -43,6 +43,14 @@ const getAllParticipants = async (listId) => {
   return participants;
 };
 
+export const addParticipant = async (listId, data) => {
+  try {
+    db.collection(`arrangements/${listId}/participants`).add(data);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 export default {
   getAllArrangements,
   getAllParticipants,

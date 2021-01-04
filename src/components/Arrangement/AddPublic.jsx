@@ -26,9 +26,9 @@ const AddPublic = () => {
         <p className="lead text-muted">
           Vedrørende din deltakelse på {arrangement.name}, er det viktig at du registrerer deg i forhold til smittesporing.
         </p>
+      <ParticipantForm />
       </div>
     </div>
-      <ParticipantForm />
   </section>
     </div>
   ); 
