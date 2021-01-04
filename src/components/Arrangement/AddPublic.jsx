@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getOneArrangement } from '../../lib/services/arrangement';
+
 import ParticipantForm from './Participants/ParticipantForm';
+import Spinner from '../shared/Spinner';
 
 const AddPublic = () => {
   const params = useParams();
@@ -15,7 +17,7 @@ const AddPublic = () => {
     getArrangement();
   }, []);
 
-  if (arrangement === undefined) return 'Kunne ikke finne noe her';
+  if (arrangement === undefined) return <Spinner />;
 
   return (
     <div>
