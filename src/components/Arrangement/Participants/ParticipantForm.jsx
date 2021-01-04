@@ -37,7 +37,7 @@ const ParticipantForm = () => {
         <div className="col-md-6">
           <label htmlFor="ageInput" className="form-label">Alder *</label>
           <input
-            type="text"
+            type="number"
             className="form-control"
             id="ageInput"
             name="age"

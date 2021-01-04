@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { getAllParticipants } from '../../lib/reducers/participantReducer';
@@ -9,8 +9,11 @@ import { getOneArrangement } from '../../lib/services/arrangement';
 import ListAllParticipants from './Participants/ListAllParticipants';
 import Spinner from '../shared/Spinner';
 import QRModal from './QRModal';
+import fire from '../../config/fire';
 
 const ViewOne = () => {
+  const user = fire.auth().currentUser;
+  const history = useHistory();
   const params = useParams();
   const dispatch = useDispatch();
 
@@ -52,6 +55,9 @@ const ViewOne = () => {
 
   if (arrangement === undefined) return <Spinner />;
   if (participants === undefined) return <Spinner />;
+  if (arrangement.belongsTo !== user.uid) {
+    history.push('/');
+  }
 
   return (
     <div>
@@ -89,6 +95,10 @@ const ViewOne = () => {
               Registrerte deltakere på
               {' '}
               {arrangement.name}
+              {' '}
+              er:
+              {' '}
+              {arrangement.participantCount}
             </p>
 
             {participants.length !== 0 ? <ListAllParticipants participants={participants} /> : 'Ingen registrerte deltakere'}
