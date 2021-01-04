@@ -6,7 +6,7 @@ import fire from '../../config/fire';
 const Register = () => {
   const [error, setError] = useState('');
   const {
-    register, handleSubmit, errors, reset,
+    register, handleSubmit, errors,
   } = useForm();
 
   const onSubmit = async (data) => {

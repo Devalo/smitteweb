@@ -1,8 +1,6 @@
 /* eslint-disable react/jsx-filename-extension */
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { getTest } from './lib/reducers/testReducer';
 import fire from './config/fire';
 
 import Layout from './components/layout/Layout';
@@ -23,7 +21,6 @@ import PublicFormRedirect from './components/Arrangement/Participants/PublicForm
 import './App.css';
 
 function App() {
-  const dispatch = useDispatch();
   const [signedIn, setSignedIn] = useState(false);
   fire.auth().onAuthStateChanged((user) => {
     if (user) {
@@ -32,10 +29,6 @@ function App() {
       setSignedIn(false);
     }
   });
-
-  useEffect(() => {
-    dispatch(getTest());
-  }, [dispatch]);
 
   return (
     <Router>

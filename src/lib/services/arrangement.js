@@ -63,7 +63,7 @@ const addArrangement = async (listName, callbackFromView) => {
 
 export const addParticipant = async (listId, data) => {
   try {
-    const added = await db.collection(`arrangements/${listId}/participants`).add(data);
+    await db.collection(`arrangements/${listId}/participants`).add(data);
     const increment = firebase.firestore.FieldValue.increment(1);
 
     const participantRef = db.collection('arrangements').doc(listId);

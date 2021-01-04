@@ -24,6 +24,7 @@ module.exports = {
   rules: {
     'react/jsx-filename-extension': 'off',
     'arrow-body-style': 'off',
+    'react/prop-types': 'off',
     'jsx-a11y/label-has-associated-control': ['error', {
       required: {
         some: ['nesting', 'id'],

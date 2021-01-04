@@ -9,7 +9,7 @@ const AddArrangement = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const {
-    register, handleSubmit, errors, reset,
+    register, handleSubmit, errors,
   } = useForm();
 
   const onSubmit = (data) => {

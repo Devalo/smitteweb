@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -38,11 +39,6 @@ const Navigation = () => {
                   {userEmail}
                 </a>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <li>
-                    <Link to="min-side/rediger" className="dropdown-item">
-                      Rediger profil
-                    </Link>
-                  </li>
                   <li>
                     <span
                       className="dropdown-item"
