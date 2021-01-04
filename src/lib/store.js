@@ -5,12 +5,14 @@ import thunk from 'redux-thunk';
 import testReducer from './reducers/testReducer';
 import arrangementReducer from './reducers/arrangementReducer';
 import participantReducer from './reducers/participantReducer';
+import notificationReducer from './reducers/notificationReducer';
 
 const reducer = combineReducers({
   // blips: blipReducer,
   tests: testReducer,
   arrangements: arrangementReducer,
   participants: participantReducer,
+  notification: notificationReducer,
 });
 
 const store = createStore(
