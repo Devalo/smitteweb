@@ -91,7 +91,7 @@ const ListAll = ({ participants, listId, arrangement }) => {
   };
 
   const handleDelete = (partId) => {
-    if (window.confirm('Er du sikker?\nSletting av en liste er en permanent handling, og kan ikke reverseres.')) {
+    if (window.confirm('Er du sikker?\nSletting av en deltaker er en permanent handling, og kan ikke reverseres.')) {
       dispatch(deleteParticipant(listId, partId));
       dispatch(setNotification('Slettet deltaker', 'success', 2));
     }

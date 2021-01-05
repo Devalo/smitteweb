@@ -91,15 +91,15 @@ const deleteArrangement = async (userId, listId) => {
 
 const deleteParticipant = async (listId, partId) => {
   const decrement = firebase.firestore.FieldValue.increment(-1);
-  const participantRef = db.collection('arrangement').doc(listId);
-  const particiRef = db.collection('arrangement').doc(listId).collection('participants').doc(partId);
+  const participantRef = db.collection('arrangements').doc(listId);
+  const particiRef = db.collection('arrangements').doc(listId).collection('participants').doc(partId);
   try {
     await particiRef.delete();
     await participantRef.update({ participantCount: decrement });
     return true;
   } catch (err) {
     console.error(err);
-    return true;
+    return false;
   }
 };
 
