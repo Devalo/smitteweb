@@ -6,10 +6,13 @@ import fire from '../../config/fire';
 import { setNotification } from '../../lib/reducers/notificationReducer';
 import { deleteArrangement } from '../../lib/reducers/arrangementReducer';
 
-const ListAll = ({ arrangementer }) => {
+// Child til AllArrangements. Mottar arrangementer fra parant.
+// Viser tabell med alle arrangementer
+const ListAllArrangements = ({ arrangementer }) => {
   const dispatch = useDispatch();
   const user = fire.auth().currentUser;
 
+  // Ved sletting, vis confirm-bokx. Dispatch så en deletefunksjon, og vis en notifikasjon.
   const deleteList = (listId) => {
     if (window.confirm('Er du sikker?\nSletting av en liste er en permanent handling, og kan ikke reverseres.')) {
       dispatch(deleteArrangement(user.uid, listId));
@@ -63,4 +66,4 @@ const ListAll = ({ arrangementer }) => {
   );
 };
 
-export default ListAll;
+export default ListAllArrangements;

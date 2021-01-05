@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+// Enkel komponent som viser knapper for innlogging og registrering
 const Frontpage = () => (
   <div>
     <section className="py-5 text-center container">

@@ -1,6 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
+// Komponent som viser notifications
+// Henter notifications fra state, i form av en tuple som inneholder både
+// beskjeden og en bootstrap class.
 const Notification = () => {
   const notification = useSelector((state) => state.notification);
   // notification[0] == message

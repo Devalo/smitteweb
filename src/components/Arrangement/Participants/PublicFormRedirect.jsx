@@ -1,5 +1,6 @@
 import React from 'react';
 
+// Komponent for å vise takkemelding etter registrering.
 const PublicFormRedirect = () => (
   <div>
     <section className="py-5 text-center container">

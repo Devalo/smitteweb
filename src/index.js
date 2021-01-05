@@ -8,6 +8,7 @@ import store from './lib/store';
 
 import App from './App';
 
+// Wrapper hele applikasjon i redux store.
 ReactDOM.render(
   <Provider store={store}>
     <App />

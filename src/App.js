@@ -12,7 +12,7 @@ import Login from './components/user/Login';
 
 import AllArrangements from './components/Arrangement/AllArrangements';
 import AddArrangement from './components/Arrangement/AddArrangement';
-import ViewOne from './components/Arrangement/ViewOne';
+import ViewOneArrangement from './components/Arrangement/ViewOneArrangement';
 
 import AddPublic from './components/Arrangement/AddPublic';
 import AddParticipant from './components/Arrangement/Participants/AddParticipant';
@@ -44,7 +44,7 @@ function App() {
                 <AddParticipant />
               </Route>
               <Route path="/arrangement/:id">
-                <ViewOne />
+                <ViewOneArrangement />
               </Route>
               <Route path="/">
                 <AllArrangements />

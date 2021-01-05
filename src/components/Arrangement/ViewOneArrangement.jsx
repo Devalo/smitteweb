@@ -11,11 +11,18 @@ import Spinner from '../shared/Spinner';
 import QRModal from './QRModal';
 import fire from '../../config/fire';
 
-const ViewOne = () => {
+// Komponent for å vise et arrangement.
+const ViewOneArrangement = () => {
   const user = fire.auth().currentUser;
   const history = useHistory();
   const params = useParams();
   const dispatch = useDispatch();
+
+  // En tom state opprettes for arrangement.
+  // Det sjekkes derretter om arrangement ligger i store.
+  // Hvis arrangement ligger i store, legges det til arrangement-state
+  // Hvis ikke, fetches arrangementet, og så legges i store
+  // deltakere fetches også.
 
   const [arrangement, setArrangement] = useState();
 
@@ -43,6 +50,11 @@ const ViewOne = () => {
     dispatch(getAllParticipants(params.id));
   }, []);
 
+  // Kopierer delbar public URL til utklippstavlen.
+  // Oppretter nytt textarea-element, legger URL til elementet
+  // appender elementet til body, og selecter det
+  // Kopierer elementet til utklippstavlen
+  // Sletter elementet fra body.
   const copyToClipboard = () => {
     const el = document.createElement('textarea');
     el.value = url;
@@ -101,4 +113,4 @@ const ViewOne = () => {
   );
 };
 
-export default ViewOne;
+export default ViewOneArrangement;

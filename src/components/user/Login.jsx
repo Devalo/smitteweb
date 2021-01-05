@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import fire from '../../config/fire';
 
+// Henter data fra form, og logger inn i firebase auth
 const Login = () => {
   const [noUser, setNoUser] = useState('');
   const {

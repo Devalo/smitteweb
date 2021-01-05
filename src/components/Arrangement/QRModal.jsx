@@ -1,6 +1,7 @@
 import React from 'react';
 import QRCode from 'qrcode.react';
 
+// Pop-up modal som generere QR-kode
 const QRModal = ({ url }) => (
   <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div className="modal-dialog">

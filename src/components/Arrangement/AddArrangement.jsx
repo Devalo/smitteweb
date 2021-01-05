@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 
 import { addArrangement } from '../../lib/reducers/arrangementReducer';
 
+// Komponent som lagrer arrangement
 const AddArrangement = () => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -12,6 +13,8 @@ const AddArrangement = () => {
     register, handleSubmit, errors,
   } = useForm();
 
+  // Dispatche data fra skjema, samt en callback-funksjon for å hente
+  // ID til det opprettede arrangementet, og redirecte til det.
   const onSubmit = (data) => {
     dispatch(addArrangement(data.name, (id) => {
       history.push(`/arrangement/${id}`);

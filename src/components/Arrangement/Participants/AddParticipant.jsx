@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import ParticipantForm from './ParticipantForm';
 
+// Viser skjema for å legge til deltakere til den innloggede brukeren.
 const AddParticipant = () => {
   const params = useParams();
 

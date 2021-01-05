@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import fire from '../../config/fire';
 
+// Henter data fra form og registrerer i firebase auth
 const Register = () => {
   const [error, setError] = useState('');
   const {
@@ -11,7 +12,7 @@ const Register = () => {
 
   const onSubmit = async (data) => {
     try {
-      fire.auth().createUserWithEmailAndPassword(data.email, data.password);
+      await fire.auth().createUserWithEmailAndPassword(data.email, data.password);
     } catch (err) {
       if (err.code === 'auth/email-already-in-use') {
         setError('Eposten er allerede i bruk');

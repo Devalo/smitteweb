@@ -4,6 +4,7 @@ import { Link, useHistory } from 'react-router-dom';
 
 import fire from '../../config/fire';
 
+// Navbar med utlogging
 const Navigation = () => {
   const history = useHistory();
   const [userEmail, setUserEmail] = useState(null);

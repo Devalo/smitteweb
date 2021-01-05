@@ -9,7 +9,12 @@ const arrangementReducer = (state = [], action) => {
       return action.data;
     case '@arrangements/GET_ONE':
       return action.data;
+    case '@arrangements/ADD_ONE': {
+      return [...state, action.data];
+    }
     case '@arrangements/DELETE': {
+      // Filtrerer ut det slettede elementet, og returnerer et nytt
+      // objekt uten det slettede elementet.
       const remaining = state.filter((arrangement) => arrangement.id !== action.data);
       return remaining;
     }
@@ -38,6 +43,8 @@ export const getOneArrangement = (listName) => {
 };
 
 export const addArrangement = (userId, callback) => {
+  // Legger til arrangement, med callback function for å passe arrangemntID
+  // tilbake til view, for å redirecte til det nye arrangementet på create.
   return async (dispatch) => {
     const data = await arrangementService.addArrangement(userId, callback);
     dispatch({
@@ -48,6 +55,9 @@ export const addArrangement = (userId, callback) => {
 };
 
 export const deleteArrangement = (userId, listId) => {
+  // Sender en request til service for sletting av arrangement.
+  // Venter på å motta bekreftelse 'true' fra service, for så å dispatche
+  // en delete til store
   return async (dispatch) => {
     const res = await arrangementService.deleteArrangement(userId, listId);
     if (res === true) {

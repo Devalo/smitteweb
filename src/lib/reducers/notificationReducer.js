@@ -1,9 +1,10 @@
 const notificationReducer = (state = '', action) => {
+  // ved @notifications/SET returneres et tuple
+  // med beskjed og bootstrap-class
   switch (action.type) {
     case '@notifications/SET':
       clearTimeout(state.timer);
       return [action.data.message, action.data.notifyType];
-      //      return action.data.message;
     case '@notifications/REMOVE':
       return '';
     default:
@@ -11,10 +12,11 @@ const notificationReducer = (state = '', action) => {
   }
 };
 
-export const removeNotification = () => ({
+const removeNotification = () => ({
   type: '@notifications/REMOVE',
 });
 
+// Action dispatcher som dispatcher en melding som varer i n sekunder
 export const setNotification = (message, notifyType, timer) => async (dispatch) => {
   dispatch({
     type: '@notifications/SET',

@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { addParticipant } from '../../../lib/services/arrangement';
 import fire from '../../../config/fire';
 
+// Komponent for skjema til lagring av deltakere
 const ParticipantForm = () => {
   const user = fire.auth().currentUser;
   const params = useParams();
@@ -12,6 +13,8 @@ const ParticipantForm = () => {
     register, handleSubmit, errors,
   } = useForm();
 
+  // Lagrer deltaker. Hvis deltaker ikke logget inn vis '/takk'
+  // Hvis ikke, push til arrangementet
   const onSubmit = (data) => {
     addParticipant(params.id, data);
     if (user === null) {

@@ -5,10 +5,12 @@ import { getOneArrangement } from '../../lib/services/arrangement';
 import ParticipantForm from './Participants/ParticipantForm';
 import Spinner from '../shared/Spinner';
 
+// Komponent for at deltakere skal registrere seg selv
 const AddPublic = () => {
   const params = useParams();
   const [arrangement, setArrangement] = useState();
 
+  // En deltaker har ikke tilgang til state, derfor hentes arrangementdata
   useEffect(() => {
     const getArrangement = async () => {
       const a = await getOneArrangement(params.id);

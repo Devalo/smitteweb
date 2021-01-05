@@ -29,53 +29,51 @@ const AgeDist = ({ participants }) => {
     }
   }
   return (
-    <div className="">
-      <table className="table">
-        <thead>
-          <tr>
-            <th>Aldersgruppe</th>
-            <th>Antall</th>
-          </tr>
-        </thead>
-        <tbody>
-          {ht['0-10'] !== 0
+    <table className="table">
+      <thead>
+        <tr>
+          <th>Aldersgruppe</th>
+          <th>Antall</th>
+        </tr>
+      </thead>
+      <tbody>
+        {ht['0-10'] !== 0
             && (
             <tr>
               <td>0-10</td>
               <td>{ht['0-10']}</td>
             </tr>
             )}
-          {ht['11-20'] !== 0
+        {ht['11-20'] !== 0
             && (
             <tr>
               <td>11-20</td>
               <td>{ht['11-20']}</td>
             </tr>
             )}
-          {ht['21-35'] !== 0
+        {ht['21-35'] !== 0
             && (
             <tr>
               <td>21-35</td>
               <td>{ht['21-35']}</td>
             </tr>
             )}
-          {ht['36-65'] !== 0
+        {ht['36-65'] !== 0
           && (
           <tr>
             <td>36-65</td>
             <td>{ht['36-65']}</td>
           </tr>
           )}
-          {ht['65+'] !== 0
+        {ht['65+'] !== 0
           && (
           <tr>
             <td>65+</td>
             <td>{ht['65+']}</td>
           </tr>
           )}
-        </tbody>
-      </table>
-    </div>
+      </tbody>
+    </table>
   );
 };
 
@@ -84,7 +82,7 @@ const ListAll = ({ participants, listId, arrangement }) => {
   const [ageDist, setAgeDist] = useState(false);
   const [ageDistName, setAgeDistName] = useState('Vis aldersfordeling');
 
-  const handleBtnClick = () => {
+  const handleAgeDistClick = () => {
     setAgeDist(!ageDist);
     if (ageDist === true) setAgeDistName('Vis aldersfordeling');
     if (ageDist === false) setAgeDistName('Vis deltakere');
@@ -111,7 +109,7 @@ const ListAll = ({ participants, listId, arrangement }) => {
       <button
         type="button"
         className="btn btn-sm btn-secondary"
-        onClick={() => handleBtnClick()}
+        onClick={() => handleAgeDistClick()}
       >
         {ageDistName}
       </button>

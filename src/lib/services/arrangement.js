@@ -5,6 +5,12 @@ import fire from '../../config/fire';
 
 const db = fire.firestore();
 
+// Oppretter en referanse til firebase-collection,
+// Henter ned et snapshot av all data
+// Looper over dataen, og oppretter et nytt objekt for hver loop,
+// hvor vi appender en ID til hvert objekt.
+// objektet pushes så til et array i parent funksjon,
+// og returneres til action.
 const getAllArrangements = async () => {
   const user = fire.auth().currentUser;
   const arrangements = [];
@@ -22,6 +28,9 @@ const getAllArrangements = async () => {
   return arrangements;
 };
 
+// Public funksjon som går utenom redux.
+// Denne servicen benyttes for å fetche arrangementdata
+// til deltakere (public)
 export const getOneArrangement = async (listId) => {
   const arrRef = db.collection('arrangements').doc(listId);
   const singleArrangement = await arrRef.get();
@@ -29,6 +38,8 @@ export const getOneArrangement = async (listId) => {
   return singleArrangement.data();
 };
 
+// Henter alle deltakere i et arrangement.
+// Sorteres etter createdAt.
 const getAllParticipants = async (listId) => {
   const participants = [];
 
@@ -45,6 +56,10 @@ const getAllParticipants = async (listId) => {
   return participants;
 };
 
+// oppretter et nytt objekt, hvor antall deltakere initialiseres,
+// og brukerens ID legges til.
+// Etter å ha mottatt ID fra firebase, returneres id i en callback
+// til view
 const addArrangement = async (listName, callbackFromView) => {
   const user = fire.auth().currentUser;
   try {
@@ -57,11 +72,16 @@ const addArrangement = async (listName, callbackFromView) => {
     const addList = await db.collection('arrangements').add(data);
 
     callbackFromView(addList.id);
+    return { ...data, id: addList.id };
   } catch (err) {
     console.error(err);
   }
+  return false;
 };
 
+// public funksjon for å legge til deltakere.
+// Legger til createdAt, og oppdaterer arrangementets deltakerantall
+// etter opprettelse.
 export const addParticipant = async (listId, data) => {
   try {
     const participantRef = db.collection('arrangements').doc(listId);
@@ -78,7 +98,11 @@ export const addParticipant = async (listId, data) => {
     console.error(err);
   }
 };
-const deleteArrangement = async (userId, listId) => {
+
+// Sletter arrangement.
+// Firebase gir ingen indikasjon på om sletting gir ok,
+// Så hvis try-blokken er vellykket, returneres true
+const deleteArrangement = async (listId) => {
   const arrangRef = db.collection('arrangements').doc(listId);
   try {
     await arrangRef.delete();
@@ -89,6 +113,7 @@ const deleteArrangement = async (userId, listId) => {
   }
 };
 
+// Sletter deltaker. Oppdaterer deltakerantallet, og returnerer true hvis ok.
 const deleteParticipant = async (listId, partId) => {
   const decrement = firebase.firestore.FieldValue.increment(-1);
   const participantRef = db.collection('arrangements').doc(listId);

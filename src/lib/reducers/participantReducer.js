@@ -25,6 +25,9 @@ export const getAllParticipants = (listId) => {
 };
 
 export const deleteParticipant = (listId, partId) => {
+  // Sender en request til service for sletting av arrangement.
+  // Venter på å motta bekreftelse 'true' fra service, for så å dispatche
+  // en delete til stor
   return async (dispatch) => {
     const res = await arrangementService.deleteParticipant(listId, partId);
     if (res === true) {

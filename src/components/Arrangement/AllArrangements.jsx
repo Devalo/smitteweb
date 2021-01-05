@@ -4,13 +4,15 @@ import { Link } from 'react-router-dom';
 
 import { getAllArrangements } from '../../lib/reducers/arrangementReducer';
 
-import ListAll from './ListAllArrangements';
+import ListAllArrangements from './ListAllArrangements';
 import Spinner from '../shared/Spinner';
 
+// Komponent for å vise alle arrangementer
 const AllArrangements = () => {
   const dispatch = useDispatch();
   const allArrangements = useSelector((state) => state.arrangements);
 
+  // Dispatcher en funksjon for å hente inn alle arrangementer
   useEffect(() => {
     dispatch(getAllArrangements());
   }, [dispatch]);
@@ -30,7 +32,7 @@ const AllArrangements = () => {
             <div className="text-left" />
             <p className="lead text-muted" />
             {allArrangements.length !== 0
-              ? <ListAll arrangementer={allArrangements} />
+              ? <ListAllArrangements arrangementer={allArrangements} />
               : <p>Her var det tomt</p>}
           </div>
         </div>
