@@ -1,10 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import fire from '../../config/fire';
 
 const Navigation = () => {
+  const history = useHistory();
   const [userEmail, setUserEmail] = useState(null);
   fire.auth().onAuthStateChanged((user) => {
     if (user) {
@@ -13,6 +14,7 @@ const Navigation = () => {
   });
   const signOut = () => {
     fire.auth().signOut();
+    history.push('/');
   };
 
   return (
