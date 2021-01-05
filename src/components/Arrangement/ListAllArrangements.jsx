@@ -13,7 +13,7 @@ const ListAll = ({ arrangementer }) => {
   const deleteList = (listId) => {
     if (window.confirm('Er du sikker?\nSletting av en liste er en permanent handling, og kan ikke reverseres.')) {
       dispatch(deleteArrangement(user.uid, listId));
-      dispatch(setNotification('Slettet enhet', 'success', 2));
+      dispatch(setNotification('Slettet arrangement', 'success', 2));
     }
   };
 

@@ -1,9 +1,14 @@
+import { setNotification } from './notificationReducer';
 import arrangementService from '../services/arrangement';
 
 const participantReducer = (state = [], action) => {
   switch (action.type) {
     case '@participants/GET_ALL':
       return action.data;
+    case '@participants/DELETE': {
+      const remaining = state.filter((participant) => participant.id !== action.data);
+      return remaining;
+    }
     default:
       return state;
   }
@@ -16,6 +21,20 @@ export const getAllParticipants = (listId) => {
       type: '@participants/GET_ALL',
       data,
     });
+  };
+};
+
+export const deleteParticipant = (listId, partId) => {
+  return async (dispatch) => {
+    const res = await arrangementService.deleteParticipant(listId, partId);
+    if (res === true) {
+      dispatch({
+        type: '@participants/DELETE',
+        data: partId,
+      });
+    } else {
+      setNotification('Noe gikk galt', 'danger', 2);
+    }
   };
 };
 

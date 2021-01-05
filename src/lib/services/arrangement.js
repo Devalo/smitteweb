@@ -33,7 +33,7 @@ const getAllParticipants = async (listId) => {
   const participants = [];
 
   const partRef = db.collection(`arrangements/${listId}/participants`);
-  const snapshot = await partRef.get();
+  const snapshot = await partRef.orderBy('createdAt', 'desc').get();
 
   snapshot.forEach((doc) => {
     const obj = {
@@ -64,11 +64,16 @@ const addArrangement = async (listName, callbackFromView) => {
 
 export const addParticipant = async (listId, data) => {
   try {
-    await db.collection(`arrangements/${listId}/participants`).add(data);
-    const increment = firebase.firestore.FieldValue.increment(1);
-
     const participantRef = db.collection('arrangements').doc(listId);
-    participantRef.update({ participantCount: increment });
+    const increment = firebase.firestore.FieldValue.increment(1);
+    const dataWithTimestamp = {
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      ...data,
+    };
+
+    await db.collection(`arrangements/${listId}/participants`).add(dataWithTimestamp);
+
+    await participantRef.update({ participantCount: increment });
   } catch (err) {
     console.error(err);
   }
@@ -84,9 +89,24 @@ const deleteArrangement = async (userId, listId) => {
   }
 };
 
+const deleteParticipant = async (listId, partId) => {
+  const decrement = firebase.firestore.FieldValue.increment(-1);
+  const participantRef = db.collection('arrangement').doc(listId);
+  const particiRef = db.collection('arrangement').doc(listId).collection('participants').doc(partId);
+  try {
+    await particiRef.delete();
+    await participantRef.update({ participantCount: decrement });
+    return true;
+  } catch (err) {
+    console.error(err);
+    return true;
+  }
+};
+
 export default {
   getAllArrangements,
   getAllParticipants,
   addArrangement,
   deleteArrangement,
+  deleteParticipant,
 };

@@ -1,4 +1,9 @@
+/* eslint-disable no-alert */
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+
+import { deleteParticipant } from '../../../lib/reducers/participantReducer';
+import { setNotification } from '../../../lib/reducers/notificationReducer';
 
 const AgeDist = ({ participants }) => {
   const ht = {
@@ -33,44 +38,76 @@ const AgeDist = ({ participants }) => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>0-10</td>
-            <td>{ht['0-10']}</td>
-          </tr>
-          <tr>
-            <td>11-20</td>
-            <td>{ht['11-20']}</td>
-          </tr>
-          <tr>
-            <td>21-35</td>
-            <td>{ht['21-35']}</td>
-          </tr>
+          {ht['0-10'] !== 0
+            && (
+            <tr>
+              <td>0-10</td>
+              <td>{ht['0-10']}</td>
+            </tr>
+            )}
+          {ht['11-20'] !== 0
+            && (
+            <tr>
+              <td>11-20</td>
+              <td>{ht['11-20']}</td>
+            </tr>
+            )}
+          {ht['21-35'] !== 0
+            && (
+            <tr>
+              <td>21-35</td>
+              <td>{ht['21-35']}</td>
+            </tr>
+            )}
+          {ht['36-65'] !== 0
+          && (
           <tr>
             <td>36-65</td>
             <td>{ht['36-65']}</td>
           </tr>
+          )}
+          {ht['65+'] !== 0
+          && (
           <tr>
             <td>65+</td>
             <td>{ht['65+']}</td>
           </tr>
+          )}
         </tbody>
       </table>
     </div>
   );
 };
 
-const ListAll = ({ participants }) => {
+const ListAll = ({ participants, listId, arrangement }) => {
+  const dispatch = useDispatch();
   const [ageDist, setAgeDist] = useState(false);
   const [ageDistName, setAgeDistName] = useState('Vis aldersfordeling');
 
   const handleBtnClick = () => {
     setAgeDist(!ageDist);
     if (ageDist === true) setAgeDistName('Vis aldersfordeling');
-    if (ageDist === false) setAgeDistName('Skjul aldersfordeling');
+    if (ageDist === false) setAgeDistName('Vis deltakere');
+  };
+
+  const handleDelete = (partId) => {
+    if (window.confirm('Er du sikker?\nSletting av en liste er en permanent handling, og kan ikke reverseres.')) {
+      dispatch(deleteParticipant(listId, partId));
+      dispatch(setNotification('Slettet deltaker', 'success', 2));
+    }
   };
 
   return (
     <div>
+      <p className="lead text-muted">
+        Antall registrerte deltakere på
+        {' '}
+        {arrangement.name}
+        {' '}
+        er:
+        {' '}
+        {participants.length}
+      </p>
       <button
         type="button"
         className="btn btn-sm btn-secondary"
@@ -93,6 +130,9 @@ const ListAll = ({ participants }) => {
                 <th>
                   Telefonnummer
                 </th>
+                <th>
+                  Handling
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -106,6 +146,15 @@ const ListAll = ({ participants }) => {
                   </td>
                   <td>
                     {p.phone}
+                  </td>
+                  <td>
+                    <button
+                      type="button"
+                      className="btn btn-danger btn-sm"
+                      onClick={() => handleDelete(p.id)}
+                    >
+                      Slett
+                    </button>
                   </td>
                 </tr>
               ))}

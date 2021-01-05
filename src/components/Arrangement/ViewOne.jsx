@@ -91,17 +91,8 @@ const ViewOne = () => {
               </div>
             </div>
             <hr />
-            <p className="lead text-muted">
-              Registrerte deltakere på
-              {' '}
-              {arrangement.name}
-              {' '}
-              er:
-              {' '}
-              {arrangement.participantCount}
-            </p>
 
-            {participants.length !== 0 ? <ListAllParticipants participants={participants} /> : 'Ingen registrerte deltakere'}
+            {participants.length !== 0 ? <ListAllParticipants participants={participants} listId={params.id} arrangement={arrangement} /> : 'Ingen registrerte deltakere'}
 
           </div>
         </div>
