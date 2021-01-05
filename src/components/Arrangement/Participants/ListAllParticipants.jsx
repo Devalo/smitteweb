@@ -6,6 +6,7 @@ import { deleteParticipant } from '../../../lib/reducers/participantReducer';
 import { setNotification } from '../../../lib/reducers/notificationReducer';
 
 const AgeDist = ({ participants }) => {
+  // Initialisere hash table med relevante keys
   const ht = {
     '0-10': 0,
     '11-20': 0,
@@ -13,6 +14,8 @@ const AgeDist = ({ participants }) => {
     '36-65': 0,
     '65+': 0,
   };
+
+  // loop over deltakere, og putte i respektive keys
   for (let i = 0; i < participants.length; i += 1) {
     const { age } = participants[i];
 
@@ -28,6 +31,8 @@ const AgeDist = ({ participants }) => {
       ht['65+'] += 1;
     }
   }
+
+  // display hash table
   return (
     <table className="table">
       <thead>
@@ -82,6 +87,7 @@ const ListAll = ({ participants, listId, arrangement }) => {
   const [ageDist, setAgeDist] = useState(false);
   const [ageDistName, setAgeDistName] = useState('Vis aldersfordeling');
 
+  // Setter navn på knapp alt ettersom om man ønsker å vise aldersfordeling eller deltakere
   const handleAgeDistClick = () => {
     setAgeDist(!ageDist);
     if (ageDist === true) setAgeDistName('Vis aldersfordeling');
@@ -95,6 +101,7 @@ const ListAll = ({ participants, listId, arrangement }) => {
     }
   };
 
+  // Hvis ageDist er togglet, vis AgeDist, hvis ikke vis vanlig tabell.
   return (
     <div>
       <p className="lead text-muted">

@@ -102,15 +102,19 @@ export const addParticipant = async (listId, data) => {
 // Sletter arrangement.
 // Firebase gir ingen indikasjon på om sletting gir ok,
 // Så hvis try-blokken er vellykket, returneres true
-const deleteArrangement = async (listId) => {
+const deleteArrangement = async (userId, listId) => {
   const arrangRef = db.collection('arrangements').doc(listId);
+  const arrangement = await arrangRef.get();
   try {
-    await arrangRef.delete();
-    return true;
+    if (arrangement.data().belongsTo === userId) {
+      await arrangRef.delete();
+      return true;
+    }
   } catch (err) {
     console.error(err);
     return false;
   }
+  return false;
 };
 
 // Sletter deltaker. Oppdaterer deltakerantallet, og returnerer true hvis ok.
